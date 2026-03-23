@@ -109,9 +109,18 @@ h1, h2, h3, .logo {
     letter-spacing: -1px;
 }
 
-nav {
+.nav-links {
     display: flex;
     gap: 2rem;
+}
+
+.mobile-menu-btn {
+    display: none;
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    cursor: pointer;
+    padding: 0.5rem;
 }
 
 .nav-link {
@@ -327,6 +336,72 @@ nav {
     flex-wrap: wrap;
 }
 
+/* Loader Screen */
+.loader-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: var(--bg-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 99999;
+    transition: opacity 0.6s ease-out, visibility 0.6s ease-out;
+}
+.loader-wrapper.fade-out {
+    opacity: 0;
+    visibility: hidden;
+}
+.loader-logo {
+    animation: pulse 1s infinite alternate;
+}
+@keyframes pulse {
+    0% { transform: scale(0.95); opacity: 0.6; }
+    100% { transform: scale(1.05); opacity: 1; filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.6)); }
+}
+
+/* Scroll Animations */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Contact Form Styling */
+.contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+.form-control {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    color: var(--text-primary);
+    font-family: var(--primary-font);
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+.form-control:focus {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: var(--accent-1);
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.2);
+}
+.form-control::placeholder {
+    color: rgba(255, 255, 255, 0.4);
+}
+
 /* Footer */
 .footer {
     text-align: center;
@@ -341,13 +416,176 @@ nav {
         font-size: 2.5rem;
     }
     
+    .mobile-menu-btn {
+        display: block;
+    }
+    
     .glass-header {
+        flex-direction: row; 
+        justify-content: space-between;
+        position: relative;
+    }
+    
+    .nav-links {
+        display: none;
         flex-direction: column;
-        gap: 1rem;
+        width: 100%;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: var(--glass-bg);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid var(--glass-border);
         border-radius: 20px;
+        padding: 1.5rem;
+        margin-top: 1rem;
+        gap: 1.5rem;
+        text-align: center;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    
+    .nav-links.active {
+        display: flex;
     }
     
     .glass-card {
         padding: 2rem;
     }
 }
+
+/* Light Theme */
+body.light-theme {
+    --bg-dark: #f8fafc;
+    --text-primary: #0f172a;
+    --text-secondary: #334155;
+    --glass-bg: rgba(255, 255, 255, 0.5);
+    --glass-border: rgba(0, 0, 0, 0.1);
+}
+body.light-theme .theme-select {
+    color: var(--text-primary);
+    border: 1px solid rgba(0,0,0,0.2);
+}
+body.light-theme .theme-select option {
+    background: #fff;
+    color: #000;
+}
+body.light-theme .cta-button:not(.primary) {
+    border-color: rgba(0,0,0,0.3);
+}
+body.light-theme .cta-button:not(.primary):hover {
+    background: rgba(0,0,0,0.05);
+    border-color: rgba(0,0,0,0.5);
+}
+body.light-theme .mac-window-top {
+    background: rgba(255, 255, 255, 0.6);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+body.light-theme .form-control {
+    background: rgba(255, 255, 255, 0.5);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+body.light-theme .form-control:focus {
+    background: rgba(255, 255, 255, 0.9);
+}
+body.light-theme .form-control::placeholder {
+    color: rgba(0, 0, 0, 0.4);
+}
+body.light-theme .mac-dot.close { border: none; }
+
+/* Marquee Cloud */
+.tech-stack-marquee {
+    width: 100%;
+    overflow: hidden;
+    padding: 2rem 0;
+    margin-top: 2rem;
+    position: relative;
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+.marquee-content {
+    display: flex;
+    gap: 1.5rem;
+    width: max-content;
+    animation: marquee 25s linear infinite;
+}
+.marquee-content:hover {
+    animation-play-state: paused;
+}
+.marquee-content span {
+    padding: 0.5rem 1.5rem;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+.marquee-content span:hover {
+    transform: translateY(-3px) scale(1.05);
+    color: var(--accent-1);
+    border-color: var(--accent-1);
+}
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(calc(-50% - 0.75rem)); }
+}
+
+/* Modals */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease-out;
+}
+.modal-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+.modal-card {
+    width: 90%;
+    max-width: 600px;
+    transform: scale(0.9);
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.modal-overlay.show .modal-card {
+    transform: scale(1);
+}
+.modal-content {
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+}
+.modal-content h3 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: var(--accent-1);
+}
+.modal-tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+}
+.modal-tech-stack span {
+    font-size: 0.8rem;
+    padding: 0.25rem 0.75rem;
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 50px;
+    color: var(--accent-1);
+    font-weight: 600;
+}
+.mac-dot.close { cursor: pointer; }

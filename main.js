@@ -77,7 +77,10 @@ window.addEventListener('mousemove', (e) => {
 
 themeSelector.addEventListener('change', (e) => {
     currentTheme = e.target.value;
+    document.body.classList.toggle('light-theme', currentTheme === 'morning' || currentTheme === 'afternoon');
 });
+// Trigger once on load
+document.body.classList.toggle('light-theme', currentTheme === 'morning' || currentTheme === 'afternoon');
 
 function initStars() {
     stars.length = 0;
@@ -175,6 +178,77 @@ function animate() {
     
     time += 1;
 }
+
+// 1. Loader Logic
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        document.querySelector('.loader-wrapper').classList.add('fade-out');
+    }, 1000); 
+});
+
+// 3. Scroll Reveal Animations (Intersection Observer)
+const revealElements = document.querySelectorAll('.reveal');
+const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" };
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('active');
+            observer.unobserve(entry.target); 
+        }
+    });
+}, observerOptions);
+
+revealElements.forEach(el => observer.observe(el));
+
+// Mobile navigation logic
+const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+const navLinks = document.querySelector('.nav-links');
+
+if (mobileMenuBtn && navLinks) {
+    mobileMenuBtn.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+    });
+
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+        });
+    });
+}
+
+// Modal Logic
+const modal = document.getElementById('projectModal');
+const closeBtn = document.getElementById('closeModalBtn');
+const modalTitle = document.getElementById('modalTitle');
+const modalDesc = document.getElementById('modalDesc');
+const modalTechStack = document.getElementById('modalTechStack');
+
+document.querySelectorAll('.modal-trigger').forEach(trigger => {
+    trigger.addEventListener('click', (e) => {
+        e.preventDefault();
+        const title = trigger.getAttribute('data-title');
+        const desc = trigger.getAttribute('data-desc');
+        const techs = trigger.getAttribute('data-tech').split(',');
+        
+        modalTitle.textContent = title;
+        modalDesc.textContent = desc;
+        
+        modalTechStack.innerHTML = '';
+        techs.forEach(tech => {
+            const span = document.createElement('span');
+            span.textContent = tech.trim();
+            modalTechStack.appendChild(span);
+        });
+        
+        modal.classList.add('show');
+    });
+});
+
+closeBtn.addEventListener('click', () => modal.classList.remove('show'));
+modal.addEventListener('click', (e) => {
+    if (e.target === modal) modal.classList.remove('show');
+});
 
 resizeCanvas();
 initStars();
