@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rizin Khader - Portfolio</title>
+    <meta name="description" content="Portfolio of Rizin Khader featuring interactive particle collision simulation">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <canvas id="particleCanvas"></canvas>
+    
+    <div class="content-wrapper">
+        <header class="glass-header">
+            <div class="logo">Rizzler</div>
+            <nav>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#certifications" class="nav-link">Certifications</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </nav>
+        </header>
+
+        <main>
+            <section id="hero" class="hero section">
+                <div class="glass-card">
+                    <h1 class="gradient-text">Rizin Khader</h1>
+                    <h2>Creative Developer & Problem Solver</h2>
+                    <p>I build interactive, high-performance web experiences with stunning interfaces and cutting-edge technologies.</p>
+                    <div class="btn-group" style="margin-top: 2rem;">
+                        <a href="#projects" class="cta-button primary">View My Work</a>
+                        <a href="https://drive.google.com/file/d/1ZZpDtYmnrk9szaabwtoFtILJ_F9xhwyU/view?usp=drive_link" target="_blank" class="cta-button">View CV</a>
+                    </div>
+                </div>
+            </section>
+
+            <section id="about" class="section">
+                <div class="glass-card full-width">
+                    <h2 class="section-title">About Me</h2>
+                    <p>I'm a passionate software engineer focused on building robust, scalable applications. I love merging computer science fundamentals with creative and beautiful interactive experiences.</p>
+                    <p style="margin-top: 1rem;">With a strong background in web development and systems architecture, I strive for excellence in every project, ensuring top-tier performance and visual fidelity.</p>
+                </div>
+            </section>
+
+            <section id="skills" class="section">
+                <h2 class="section-title text-center">My Skills</h2>
+                <div class="glass-card full-width text-center" style="margin-bottom: 2rem;">
+                    <p style="font-size: 1.15rem; color: var(--text-secondary); max-width: 900px; margin: 0 auto;">
+                        I pick things up quickly and stay updated with the latest technologies. At the same time, I don’t just chase every new trend. I focus on choosing tools and technologies that are actually useful—ones that help save time and improve efficiency for both me and my team.
+                    </p>
+                </div>
+                
+                <div class="projects-grid">
+                    <div class="mac-window">
+                        <div class="mac-window-top">
+                            <div class="mac-dot close"></div>
+                            <div class="mac-dot minimize"></div>
+                            <div class="mac-dot maximize"></div>
+                        </div>
+                        <div class="mac-window-content text-center">
+                            <div class="skill-icon">
+                                <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+                                </svg>
+                            </div>
+                            <h3>MERN Stack</h3>
+                            <p>MongoDB, Express.js, React, and Node.js working securely together to build powerful, scalable full-stack applications.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mac-window">
+                        <div class="mac-window-top">
+                            <div class="mac-dot close"></div>
+                            <div class="mac-dot minimize"></div>
+                            <div class="mac-dot maximize"></div>
+                        </div>
+                        <div class="mac-window-content text-center">
+                            <div class="skill-icon">
+                                <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                    <path d="M9 12l2 2 4-4"></path>
+                                </svg>
+                            </div>
+                            <h3>Cyber Security</h3>
+                            <p>Foundations in cyber security preventing exploits, securing data channels, and establishing robust defenses.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mac-window">
+                        <div class="mac-window-top">
+                            <div class="mac-dot close"></div>
+                            <div class="mac-dot minimize"></div>
+                            <div class="mac-dot maximize"></div>
+                        </div>
+                        <div class="mac-window-content text-center">
+                            <div class="skill-icon">
+                                <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                    <path d="M3 21v-2a4 4 0 0 1 7-3.87"></path>
+                                </svg>
+                            </div>
+                            <h3>Soft Skills</h3>
+                            <p>Effective team communication, collaborative problem solving, leadership, and proactive adaptability in dynamic environments.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="projects" class="section">
+                <h2 class="section-title text-center">Featured Projects</h2>
+                <div class="projects-grid">
+                    <div class="mac-window">
+                        <div class="mac-window-top">
+                            <div class="mac-dot close"></div>
+                            <div class="mac-dot minimize"></div>
+                            <div class="mac-dot maximize"></div>
+                        </div>
+                        <div class="mac-window-content">
+                            <h3>Library Management System</h3>
+                            <p>A comprehensive full-stack solution for managing library resources, user tracking, and automated book reservations seamlessly.</p>
+                            <a href="#" class="project-link">Explore →</a>
+                        </div>
+                    </div>
+                    <div class="mac-window">
+                        <div class="mac-window-top">
+                            <div class="mac-dot close"></div>
+                            <div class="mac-dot minimize"></div>
+                            <div class="mac-dot maximize"></div>
+                        </div>
+                        <div class="mac-window-content">
+                            <h3>Interactive Physics Engine</h3>
+                            <p>A creative, high-performance HTML5 Canvas physics simulation engine featuring dynamic environments and robust collision mapping.</p>
+                            <a href="#" class="project-link">Explore →</a>
+                        </div>
+                    </div>
+                    <div class="mac-window">
+                        <div class="mac-window-top">
+                            <div class="mac-dot close"></div>
+                            <div class="mac-dot minimize"></div>
+                            <div class="mac-dot maximize"></div>
+                        </div>
+                        <div class="mac-window-content">
+                            <h3>Web App Security Testing</h3>
+                            <p>Rigorous vulnerability assessments and security testing of complex web platforms utilizing OWASP ZAP.</p>
+                            <a href="#" class="project-link">Explore →</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="certifications" class="section">
+                <h2 class="section-title text-center">Certifications</h2>
+                <div class="projects-grid">
+                    <div class="mac-window">
+                        <div class="mac-window-top">
+                            <div class="mac-dot close"></div>
+                            <div class="mac-dot minimize"></div>
+                            <div class="mac-dot maximize"></div>
+                        </div>
+                        <div class="mac-window-content">
+                            <h3>Google Cybersecurity</h3>
+                            <p>Comprehensive training in cyber defense, network security, and threat mitigation strategies.</p>
+                            <a href="https://www.coursera.org/account/accomplishments/specialization/MSLR2ST2AD4H" target="_blank" class="project-link">View Credential →</a>
+                        </div>
+                    </div>
+                    <div class="mac-window">
+                        <div class="mac-window-top">
+                            <div class="mac-dot close"></div>
+                            <div class="mac-dot minimize"></div>
+                            <div class="mac-dot maximize"></div>
+                        </div>
+                        <div class="mac-window-content">
+                            <h3>Upcoming Certification</h3>
+                            <p>Details and credentials will be uploaded here shortly when the requirements are met.</p>
+                            <a href="#" class="project-link">View Credential →</a>
+                        </div>
+                    </div>
+                    <div class="mac-window">
+                        <div class="mac-window-top">
+                            <div class="mac-dot close"></div>
+                            <div class="mac-dot minimize"></div>
+                            <div class="mac-dot maximize"></div>
+                        </div>
+                        <div class="mac-window-content">
+                            <h3>Upcoming Certification</h3>
+                            <p>Details and credentials will be uploaded here shortly when the requirements are met.</p>
+                            <a href="#" class="project-link">View Credential →</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="contact" class="section">
+                <div class="glass-card text-center">
+                    <h2 class="section-title">Let's Connect</h2>
+                    <p>Interested in collaborating on a dynamic project or looking to add a creative developer to your team?</p>
+                    <a href="mailto:contact@rizinkhader.com" class="cta-button primary" style="margin-top: 2rem;">Get in Touch</a>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <p>© 2026 Rizin Khader. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <div class="theme-widget">
+        <select id="themeSelector" class="theme-select">
+            <option value="morning">Morning</option>
+            <option value="afternoon">Afternoon</option>
+            <option value="evening" selected>Evening</option>
+            <option value="night">Night</option>
+        </select>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
