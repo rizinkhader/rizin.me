@@ -49,6 +49,50 @@ const themes = {
 const stars = [];
 const STAR_COUNT = 150;
 
+const meteors = [];
+
+function drawMeteors() {
+    if (Math.random() < 0.015 && meteors.length < 3) {
+        meteors.push({
+            x: Math.random() * width * 1.5,
+            y: -100,
+            length: Math.random() * 100 + 80,
+            speed: Math.random() * 15 + 15,
+            angle: Math.PI / 4,
+            opacity: 1,
+            thickness: Math.random() * 1.5 + 0.5
+        });
+    }
+
+    for (let i = meteors.length - 1; i >= 0; i--) {
+        let m = meteors[i];
+        m.x -= Math.cos(m.angle) * m.speed;
+        m.y += Math.sin(m.angle) * m.speed;
+        m.opacity -= 0.01;
+
+        if (m.opacity <= 0 || m.x < -200 || m.y > height + 200) {
+            meteors.splice(i, 1);
+            continue;
+        }
+
+        ctx.beginPath();
+        const endX = m.x + Math.cos(m.angle) * m.length;
+        const endY = m.y - Math.sin(m.angle) * m.length;
+
+        const grad = ctx.createLinearGradient(m.x, m.y, endX, endY);
+        grad.addColorStop(0, `rgba(255, 255, 255, ${m.opacity})`);
+        grad.addColorStop(1, `rgba(255, 255, 255, 0)`);
+
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = m.thickness;
+        ctx.lineCap = 'round';
+        ctx.moveTo(m.x, m.y);
+        ctx.lineTo(endX, endY);
+        ctx.stroke();
+        ctx.closePath();
+    }
+}
+
 // Ocean Waves Geometry
 const waves = [
     { yOffset: 0.55, amplitude: 35, frequency: 0.003, speed: 0.015, alpha: 0.4, crestSharpness: 2 },
@@ -122,6 +166,9 @@ function drawSky(theme) {
     ctx.beginPath();
     ctx.arc(width * 0.5, height * theme.sunPos, theme.sunSize, 0, Math.PI * 2); 
     
+    ctx.shadowBlur = 60;
+    ctx.shadowColor = theme.sunColor[0];
+    
     const sunGradient = ctx.createRadialGradient(width * 0.5, height * theme.sunPos, theme.sunSize * 0.2, width * 0.5, height * theme.sunPos, theme.sunSize * 2.5);
     sunGradient.addColorStop(0, theme.sunColor[0]);
     sunGradient.addColorStop(0.2, theme.sunColor[1]);
@@ -130,6 +177,8 @@ function drawSky(theme) {
     ctx.fillStyle = sunGradient;
     ctx.fill();
     ctx.closePath();
+    
+    ctx.shadowBlur = 0;
 }
 
 function drawWaves(theme) {
@@ -174,6 +223,9 @@ function animate() {
     const theme = themes[currentTheme];
     
     drawSky(theme);
+    if (currentTheme === 'night') {
+        drawMeteors();
+    }
     drawWaves(theme);
     
     time += 1;

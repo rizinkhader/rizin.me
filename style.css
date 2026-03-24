@@ -22,6 +22,7 @@ body {
     font-family: var(--primary-font);
     overflow-x: hidden;
     line-height: 1.6;
+    transition: background-color 0.6s ease, color 0.6s ease;
 }
 
 /* Canvas Background */
@@ -57,6 +58,7 @@ h1, h2, h3, .logo {
     font-size: 4rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
+    filter: drop-shadow(0 0 30px rgba(59, 130, 246, 0.4));
 }
 
 .section-title {
@@ -76,7 +78,7 @@ h1, h2, h3, .logo {
     align-items: center;
     padding: 1.5rem 2rem;
     margin-top: 1.5rem;
-    background: var(--glass-bg);
+    background: linear-gradient(135deg, var(--glass-bg), transparent);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--glass-border);
@@ -84,17 +86,19 @@ h1, h2, h3, .logo {
     position: sticky;
     top: 1.5rem;
     z-index: 100;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transition: background 0.6s ease, border-color 0.6s ease;
 }
 
 .glass-card {
-    background: var(--glass-bg);
+    background: linear-gradient(135deg, var(--glass-bg), transparent);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--glass-border);
     border-radius: 20px;
     padding: 3rem;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease, border-color 0.3s ease;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s ease, border-color 0.6s ease, background 0.6s ease, box-shadow 0.6s ease;
 }
 
 .glass-card:hover {
@@ -261,15 +265,15 @@ h1, h2, h3, .logo {
 }
 
 .mac-window {
-    background: var(--glass-bg);
+    background: linear-gradient(135deg, var(--glass-bg), transparent);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid var(--glass-border);
     border-radius: 12px;
     overflow: hidden;
     position: relative;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease, border-color 0.3s ease;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s ease, border-color 0.6s ease, background 0.6s ease, box-shadow 0.6s ease;
     display: flex;
     flex-direction: column;
 }
@@ -286,6 +290,7 @@ h1, h2, h3, .logo {
     display: flex;
     align-items: center;
     gap: 8px;
+    transition: background 0.6s ease;
 }
 
 .mac-dot {
@@ -295,11 +300,35 @@ h1, h2, h3, .logo {
     border: none;
     padding: 0;
     outline: none;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.mac-dot.close { background: #ff5f56; }
-.mac-dot.minimize { background: #ffbd2e; }
-.mac-dot.maximize { background: #27c93f; }
+.mac-dot::before {
+    content: '';
+    font-size: 9px;
+    font-weight: 800;
+    color: rgba(0,0,0,0.65);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    line-height: 1;
+}
+
+.mac-window-top:hover .mac-dot::before,
+.mac-window-top:hover .mac-dot.close::before {
+    opacity: 1;
+}
+
+.mac-dot.close { background: #ff5f56; cursor: pointer; }
+.mac-dot.close::before { content: '×'; font-size: 11px; margin-top: -1px; }
+
+.mac-dot.minimize { background: #ffbd2e; cursor: pointer; }
+.mac-dot.minimize::before { content: '−'; font-size: 9px; margin-top: -2px; }
+
+.mac-dot.maximize { background: #27c93f; cursor: pointer; }
+.mac-dot.maximize::before { content: '+'; font-size: 9px; }
 
 .mac-window-content {
     padding: 2rem;
@@ -331,6 +360,34 @@ h1, h2, h3, .logo {
     color: var(--accent-1);
     margin: 0 auto 1.5rem auto;
     box-shadow: inset 0 0 20px rgba(255,255,255,0.02), 0 10px 20px rgba(0,0,0,0.2);
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.skill-icon::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, transparent 60%, var(--accent-1) 100%);
+    z-index: -1;
+    animation: rotate-border 2.5s linear infinite;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.mac-window:hover .skill-icon {
+    transform: scale(1.05);
+    box-shadow: inset 0 0 20px rgba(255,255,255,0.05), 0 15px 30px rgba(59, 130, 246, 0.3);
+}
+
+.mac-window:hover .skill-icon::before {
+    opacity: 1;
+}
+
+@keyframes rotate-border {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
 .btn-group {
@@ -592,3 +649,18 @@ body.light-theme .mac-dot.close { border: none; }
     font-weight: 600;
 }
 .mac-dot.close { cursor: pointer; }
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-dark);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--accent-1);
+    border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-2);
+}
